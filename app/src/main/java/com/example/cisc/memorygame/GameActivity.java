@@ -10,6 +10,8 @@ import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +21,9 @@ import java.io.IOException;
 import java.util.Random;
 
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //phase 5 - our animation object
+    Animation wobble;
 
     //Prepare objects and sound references
     //initialize sound variables
@@ -64,6 +69,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+
+        //phase5 - animation
+        wobble = AnimationUtils.loadAnimation(this, R.anim.wobble);
 
         //phase 4
         //initialize our two SharedPreferences objects
@@ -117,31 +125,36 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                     //All the thread action will go here
                     //All the thread action will go here
                     //make sure all the buttons are made visible
-                    button1.setVisibility(View.VISIBLE);
-                    button2.setVisibility(View.VISIBLE);
-                    button3.setVisibility(View.VISIBLE);
-                    button4.setVisibility(View.VISIBLE);
+//                    button1.setVisibility(View.VISIBLE);
+//                    button2.setVisibility(View.VISIBLE);
+//                    button3.setVisibility(View.VISIBLE);
+//                    button4.setVisibility(View.VISIBLE);
                     switch (sequenceToCopy[elementToPlay]) {
                         case 1:
                             //hide a button
-                            button1.setVisibility(View.INVISIBLE);
+                           // button1.setVisibility(View.INVISIBLE);
+                            button1.startAnimation(wobble);
                             //play a sound
                             soundPool.play(sample1, 1, 1, 0, 0, 1);
                             break;
                         case 2:
                             //hide a button
-                            button2.setVisibility(View.INVISIBLE);
+                            //button2.setVisibility(View.INVISIBLE);
+                            button2.startAnimation(wobble);
                             //play a sound
                             soundPool.play(sample2, 1, 1, 0, 0, 1);
                             break;
                         case 3:
-                            //hide a button button3.setVisibility(View.INVISIBLE);
+                            //hide a button
+                            //button3.setVisibility(View.INVISIBLE);
+                            button3.startAnimation(wobble);
                             //play a sound
                             soundPool.play(sample3, 1, 1, 0, 0, 1);
                             break;
                         case 4:
                             //hide a button
-                            button4.setVisibility(View.INVISIBLE);
+                           //button4.setVisibility(View.INVISIBLE);
+                            button4.startAnimation(wobble);
                             //play a sound
                             soundPool.play(sample4, 1, 1, 0, 0, 1);
                             break;
@@ -240,10 +253,10 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void sequenceFinished() {
         playSequence = false;
         //make sure all the buttons are made visible
-        button1.setVisibility(View.VISIBLE);
-        button2.setVisibility(View.VISIBLE);
-        button3.setVisibility(View.VISIBLE);
-        button4.setVisibility(View.VISIBLE);
+//        button1.setVisibility(View.VISIBLE);
+//        button2.setVisibility(View.VISIBLE);
+//        button3.setVisibility(View.VISIBLE);
+//        button4.setVisibility(View.VISIBLE);
         textWatchGo.setText("GO!");
         isResponding = true;
     }
